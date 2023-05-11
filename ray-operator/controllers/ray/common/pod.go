@@ -508,7 +508,7 @@ func getRayContainerIndex(podSpec v1.PodSpec) (rayContainerIndex int) {
 	// if the env var is missing, we choose containers[0].
 	for i, container := range podSpec.Containers {
 		for _, env := range container.Env {
-			if env.Name == strings.ToLower("ray") && env.Value == strings.ToLower("true") {
+			if strings.ToLower(env.Name) == "ray" && strings.ToLower(env.Value) == "true" {
 				log.Info("Head pod container with index " + strconv.Itoa(i) + " identified as Ray container based on env RAY=true.")
 				return i
 			}
